@@ -1,17 +1,17 @@
 import React from 'react';
-import {Platform, StyleSheet, View, Text, ScrollView, Dimensions, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Dimensions, FlatList, TouchableOpacity, Image} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
-import {List, ListItem} from "native-base";
+import { List, ListItem } from "native-base";
 import List_planned  from '../components/lists/list_planned';
 import List_withoutDriver  from '../components/lists/withoutDriver';
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
-const { width, height } = Dimensions.get('screen');
-
-class Planned extends React.Component {
+class PlannedScreen extends React.Component {
 
     constructor(props){
         super(props);
-        this.state ={ isLoading: true}
+        this.state = { isLoading: true }
     }
 
     componentDidMount(){
@@ -48,193 +48,154 @@ class Planned extends React.Component {
     }
 
     render() {
-        const { navigation } = this.props;
+        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <ScrollView>
-                    <View style={{ marginTop: 10, marginBottom: 10 }}>
-                        <List
-                            dataArray={this.state.dataSource}
-                            extraData={this.state}
-                            renderRow={(item) => {
-                                return (
-                                    <ListItem style={{ borderBottomWidth: 0 }}>
-                                        <List_planned data={item} />
-                                    </ListItem>
-                                )
-                            }
-                            }
-                        />
-                    </View>
+
+                <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
+                    <TouchableOpacity onPress={() => navigate('Home')}>
+                        <Image style={{ width: 35, height: 35,  }}
+                               source={require('../assets/images/icons-13.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigate('Offers')}>
+                        <Image style={{ width: 35, height: 35,  }}
+                               source={require('../assets/images/icons-13.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigate('Planned')}>
+                        <Image style={{ width: 35, height: 35,  }}
+                               source={require('../assets/images/icons-13.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigate('Settings')}>
+                        <Image style={{ width: 35, height: 35,  }}
+                               source={require('../assets/images/icons-13.png')} />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.headerLogo}>
+                    <Image style={styles.logo}
+                           source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
+                </View>
+
+                <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -13, opacity: 0.6}}>
+
+                </View>
+
+                <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42', height: 12, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, marginLeft: 40, marginRight: 40, marginTop: 0, opacity: 0.2}}>
+                </View>
+
+                <ScrollView style={{ width: width }}>
+                    <List
+                        dataArray={this.state.dataSource}
+                        extraData={this.state}
+                        renderRow={(item) => {
+                            return (
+                                <ListItem style={{ borderBottomWidth: 0, width: width }}>
+                                    <List_planned data={item} />
+                                </ListItem>
+                            )
+                        }
+                        }
+                    />
                 </ScrollView>
             </View>
         );
     }
 }
 
-export default Planned;
+export default PlannedScreen;
 
-Planned.navigationOptions = {
-    title: 'Planned',
-    headerStyle: {
-        backgroundColor: '#000',
-    },
-    headerTintColor: '#EBEFF2',
-    headerTitleStyle: {
-        fontWeight: 'bold',
-    },
+PlannedScreen.navigationOptions = {
+    header: null,
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
-        width:'100%',
-        alignSelf:'center'
+        backgroundColor: '#0c0c0c',
     },
-    listItem: {
-        flexDirection: 'row',
-        marginBottom: 15,
-        alignSelf:'flex-start'
-    },
-    item: {
-        marginRight: 0,
-        marginBottom:0,
-        paddingBottom:0,
-        width: '100%',
-        alignSelf: 'stretch',
-    },
-    icon: {
-        fontSize: 25,
-        marginRight: 10,
-        color: '#dbdce0',
-    },
-    itemHeader: {
-        backgroundColor: '#fffeca',
-        borderBottomWidth: 2,
-        marginBottom: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    header: {
-        paddingTop: 48,
-        paddingHorizontal: 36,
-        paddingBottom: 24,
-    },
-    column: {
-        width: 100,
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1,
-        flexDirection: 'column',
-    },
-    topHeader: {
-        flex: 1,
-        marginLeft: 25,
-        marginTop: 65,
+    headerLogo: {
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#FBAF42',
+        height: '30%',
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        shadowColor: '#FBAF42',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.8,
+        shadowRadius: 10,
     },
-    firstRow: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    iconBackground: {
-        fontSize: 25,
-        marginRight: 10,
-        color: '#dbdce0',
-        backgroundColor: '#374372',
-        padding: 5,
-    },
-    wrapper: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        backgroundColor: '#131426',
-        marginTop:0,
-        paddingTop:0,
-    },
-    itemHeaderBusiness: {
-        backgroundColor: '#602ff3',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        overflow: "hidden",
-        color: '#271a17',
-        marginBottom: 30,
+    box: {
+        backgroundColor: '#000',
+        zIndex: 2,
+        shadowColor: "#FBAF42",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.53,
+        shadowRadius: 13.97,
+        elevation: 21,
+        margin: 15,
+        padding: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding:5,
-        paddingLeft: 10,
+        borderRadius: 15,
+        marginTop: 50
     },
-    itemHeaderEmpty: {
-        backgroundColor: '#e93343',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        overflow: "hidden",
-        color: '#271a17',
-        marginBottom: 30,
+    boxContent: {
+        padding: 15,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        flexDirection: 'column',
+    },
+    headerText: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 16,
+        marginLeft: 15
+    },
+    icons: {
+        marginTop: 50,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding:5,
-        paddingLeft: 10,
+        justifyContent:"center",
+        alignItems:"center",
     },
-    inline: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    footerItem: {
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        overflow: "hidden",
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderTopColor: '#1e1f24',
-        borderTopWidth: 1,
-        textAlign: 'center',
-    },
-    itemFooterActive: {
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
+    header: {
+        backgroundColor: '#f2a948',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
         overflow: "hidden",
         color: '#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        fontWeight: '600',
-        backgroundColor: '#e93343',
-        paddingLeft: 10,
-        padding: 5,
-        paddingBottom: 10,
-        width: '50%',
-        paddingTop: 10,
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
-        textAlign: 'center',
-
+        width: '100%',
+        padding: 10,
     },
-    itemFooter: {
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        overflow: "hidden",
-        color: '#f4f8fe',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        fontWeight: '600',
-        paddingLeft: 10,
-        alignSelf: 'stretch',
+    logo: {
+        width:'60%',
         height: 40,
-        width: '25%',
-        paddingTop: 10,
-        textAlign: 'center',
-        borderColor:'red',borderBottomWidth:1,borderTopWidth:1
-    },
-    column_bordered: {
-        borderBottomWidth: 2,
-        borderBottomColor: '#303249',
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        flex: 1,
-        width: '50%',
+        justifyContent:"center",
+        alignItems:"center",
+        marginTop: 65
+    },
+    iconImg: {
+        width: 50,
+        height: 50,
+        flexDirection: 'row',
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    icon: {
+        fontSize: 18,
+        marginRight: 10,
+        padding: 5,
+        color: '#fffdff',
     },
 });

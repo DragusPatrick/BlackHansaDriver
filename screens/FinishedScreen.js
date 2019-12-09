@@ -8,7 +8,7 @@ import OffersScreen from "./OffersScreen";
 
 const { width, height } = Dimensions.get('screen');
 
-class Finished extends React.Component {
+class FinishedScreen extends React.Component {
 
     constructor(props){
         super(props);
@@ -73,7 +73,7 @@ class Finished extends React.Component {
     }
 }
 
-export default Finished;
+export default FinishedScreen;
 
 FinishedScreen.navigationOptions = {
     title: 'Finished',

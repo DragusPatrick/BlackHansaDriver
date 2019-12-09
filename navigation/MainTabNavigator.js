@@ -5,7 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import OffersScreen from '../screens/OffersScreen';
-import SettingsScreen from '../screens/PlannedScreen';
+import PlannedScreen from '../screens/PlannedScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -51,6 +52,22 @@ OffersStack.navigationOptions = {
 
 OffersStack.path = '';
 
+const PlannedStack = createStackNavigator(
+    {
+        Planned: PlannedScreen,
+    },
+    config
+);
+
+PlannedStack.navigationOptions = {
+    tabBarLabel: 'Planned',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon focused={focused} name={ Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    ),
+};
+
+PlannedStack.path = '';
+
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
@@ -70,6 +87,7 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   OffersStack,
+  PlannedStack,
   SettingsStack,
 });
 

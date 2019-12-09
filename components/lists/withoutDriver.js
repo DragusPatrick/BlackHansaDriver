@@ -25,21 +25,29 @@ class withoutDriver extends PureComponent {
             <View style={styles.item}>
                 <View style={styles.itemHeaderEmpty}>
                     <Text style={{
-                        fontSize: 14,
+                        fontSize: 13,
                         width: 260,
                         marginTop: 7,
                         paddingLeft: 7,
                         textAlign: 'left',
                         fontWeight: '600',
-                        color: '#FFE4EB'
-                    }}>20:20 - 25 Jun, #52345 </Text>
+                        color: '#fff'
+                    }}>16:45 - 25 Jun, #544353 - BUSSINESS</Text>
+                    <View
+                        style={{
+                            borderLeftWidth: 1,
+                            marginTop: 5,
+                            marginBottom: 5,
+                            borderLeftColor: '#d6d6d6',
+                        }}
+                    />
                     <TouchableOpacity onPress={() => console.log('puff')} style={styles.burgerButton}>
                         <Text style={{
                             width: 50,
                             height: 25,
                             textAlign: 'center',
                             marginTop: 5,
-                            color: '#FFE4EB',
+                            color: '#fff',
                             fontWeight: '600'
                         }}>HELP</Text>
                     </TouchableOpacity>
@@ -59,18 +67,17 @@ class withoutDriver extends PureComponent {
                             <View>
                                 <Text style={{
                                     color: '#f2faf6',
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     marginBottom: 5,
                                     fontWeight: '600'
-                                }}>No Driver</Text>
+                                }}>{this.data.driver.name}</Text>
                                 <Text style={{
                                     color: '#f3fcfd',
                                     fontWeight: '400',
                                     fontSize: 14
-                                }}>GL 02 DRA</Text>
-                                <Text style={{color: '#502236', fontWeight: '400', fontSize: 14, marginTop: 5,}}>
-                                    Pending
-                                </Text>
+                                }}>{this.data.vehicle.plate}</Text>
+                                <Text style={{color: '#f5e0df', fontWeight: '400', fontSize: 11, marginTop: 5,}}>One
+                                    Way</Text>
                             </View>
                         </View>
                     </View>
@@ -78,8 +85,8 @@ class withoutDriver extends PureComponent {
                     <View style={styles.column}>
                         <View style={styles.listItem}>
                             <View>
-                                <Text style={{color: '#f2faf6', fontSize: 16, marginBottom: 5, fontWeight: '600'}}>
-                                    dasfgsdgdsfgdsg
+                                <Text style={{color: '#f2faf6', fontSize: 15, marginBottom: 5, fontWeight: '600'}}>
+                                    {this.data.pickup_address}
                                 </Text>
                             </View>
                         </View>
@@ -100,11 +107,11 @@ class withoutDriver extends PureComponent {
                             <View style={styles.inline}>
                                 <Text style={{
                                     color: '#f2faf6',
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     marginBottom: 5,
-                                    fontWeight: '600',
+                                    fontWeight: '500',
                                     paddingTop: 10
-                                }}>LF 6345634 </Text>
+                                }}>LG 324534</Text>
                             </View>
                         </View>
 
@@ -118,15 +125,14 @@ class withoutDriver extends PureComponent {
                                 />
                             </View>
                             <View>
-                                <Text style={{color: '#f2faf6', fontSize: 16, marginBottom: 5, fontWeight: '600'}}>
-                                    Dragus
-                                    Patrick
+                                <Text style={{color: '#f2faf6', fontSize: 14, marginBottom: 5, fontWeight: '500'}}>
+                                    Guest Name
                                 </Text>
                                 <Text style={{
                                     color: '#f3fcfd',
                                     fontWeight: '400',
                                     fontSize: 14
-                                }}>dasdas</Text>
+                                }}>#PICKUP</Text>
                                 <Text style={{
                                     color: '#7f8abc',
                                     fontWeight: '400',
@@ -137,7 +143,7 @@ class withoutDriver extends PureComponent {
                                     borderWidth: 1,
                                     height: 50,
                                     width: 115
-                                }}>sadasd</Text>
+                                }}>Lorem ipsum dolor sit met</Text>
                             </View>
                         </View>
                     </View>
@@ -160,11 +166,11 @@ class withoutDriver extends PureComponent {
                             <View flex bottom>
                                 <Text style={{
                                     color: '#f2faf6',
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     marginBottom: 5,
                                     fontWeight: '600'
                                 }}>
-                                    dsafsd
+                                    {this.data.drop_address}
                                 </Text>
                             </View>
                         </View>
@@ -172,8 +178,8 @@ class withoutDriver extends PureComponent {
                 </View>
 
                 <View style={styles.footerItem}>
-                    <Text style={styles.itemFooterActive}>Accept</Text>
-                    <Text style={styles.itemFooterActive}>Decline</Text>
+                    <Text style={styles.itemFooter}>Accept</Text>
+                    <Text style={styles.itemFooter}>Decline</Text>
                 </View>
 
             </View>
@@ -276,6 +282,7 @@ const styles = StyleSheet.create({
         borderTopColor: '#1e1f24',
         borderTopWidth: 1,
         textAlign: 'center',
+        backgroundColor: '#e93343'
     },
     itemFooterActive: {
         borderBottomLeftRadius: 15,

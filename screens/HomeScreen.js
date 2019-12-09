@@ -6,128 +6,129 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Dimensions,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
+import OffersScreen from "./OffersScreen";
 
-export default function HomeScreen() {
-  return (
-      <View style={styles.container}>
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
-        <View style={styles.headerLogo}>
-          <Image style={styles.logo}
-                 source={require('../assets/images/logo.png')} />
+class HomeScreen extends React.Component {
+
+
+
+  render() {
+    const {navigate} = this.props.navigation;
+    return (
+        <View style={styles.container}>
+
+          <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
+            <TouchableOpacity onPress={() => navigate('Home')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/icons-13.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigate('Offers')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/icons-13.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigate('Planned')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/icons-13.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigate('Settings')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/icons-13.png')} />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.headerLogo}>
+            <Image style={styles.logo}
+                   source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
+          </View>
+
+          <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -13, opacity: 0.6}}>
+
+          </View>
+
+          <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42', height: 12, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, marginLeft: 40, marginRight: 40, marginTop: 0, opacity: 0.2}}>
+
+          </View>
+
+
+          <View>
+            <View style={styles.box}>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={styles.iconImg}
+                       source={require('../assets/images/icons-13.png')} />
+                <Text style={styles.headerText}>Lorem Ipsum Dolor</Text>
+              </View>
+
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{textAlign: 'center', color: '#fffdff', fontWeight: '600', fontSize: 18}}>
+                  <Icon
+                      name="ios-star"
+                      color="#dbdce0"
+                      size={20}
+                      style={styles.icon}
+                  /> 4.8
+                </Text>
+              </View>
+            </View>
+            <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
+
+            </View>
+          </View>
         </View>
-
-        <View style={styles.icons}>
-          <View style={{flexDirection: 'column',justifyContent:"center", alignItems:"center"}}>
-            <Icon
-                name="ios-contact"
-                color="#dbdce0"
-                size={20}
-                style={styles.iconSmall}
-            />
-
-            <Text style={{color: '#fff', fontWeight: '600'}}>User</Text>
-          </View>
-
-          <View style={{flexDirection: 'column', justifyContent:"center", alignItems:"center"}}>
-            <Icon
-                name="ios-help-circle"
-                color="#dbdce0"
-                size={20}
-                style={styles.iconSmall}
-            />
-
-            <Text style={{color: '#fff',justifyContent:"center", alignItems:"center", fontWeight: '600'}}>Help</Text>
-          </View>
-        </View>
-
-        <View style={styles.box}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Dragus Patrick</Text>
-            <Text style={{textAlign: 'center', color: '#fffdff', fontWeight: '600', fontSize: 18}}>
-              <Icon
-                  name="ios-star"
-                  color="#dbdce0"
-                  size={20}
-                  style={styles.icon}
-              /> 4.8
-            </Text>
-          </View>
-
-          <View style={styles.boxContent}>
-            <Text style={{color: '#fff',}}>20:30 TXX</Text>
-            <Text style={{color: '#fff', paddingTop: 10}}>Helensee lorem ipsum bla bla</Text>
-          </View>
-        </View>
-
-      </View>
-  );
+    );
+  }
 }
+
+export default HomeScreen;
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    padding: 15,
+    backgroundColor: '#0c0c0c',
   },
   headerLogo: {
-    marginTop: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FBAF42',
+    height: '30%',
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    shadowColor: '#FBAF42',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
   },
   box: {
-    backgroundColor: '#121318',
-    justifyContent: "center",
-    position: 'absolute',
-    bottom: 5,
-    marginBottom: 100,
-    marginLeft:15,
-    width: '100%',
-    flex: 1,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    backgroundColor: '#000',
+    zIndex: 2,
+    shadowColor: "#FBAF42",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.53,
+    shadowRadius: 13.97,
+    elevation: 21,
+    margin: 15,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 15,
+    marginTop: 50
   },
   boxContent: {
     padding: 15,
@@ -137,8 +138,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#fff',
-    fontWeight: '700',
-    fontSize: 18,
+    fontWeight: '600',
+    fontSize: 16,
+    marginLeft: 15
   },
   icons: {
     marginTop: 50,
@@ -160,7 +162,19 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   logo: {
-    width: 280,
+    width:'60%',
+    height: 40,
+    flexDirection: 'row',
+    justifyContent:"center",
+    alignItems:"center",
+    marginTop: 65
+  },
+  iconImg: {
+    width: 50,
+    height: 50,
+    flexDirection: 'row',
+    justifyContent:"center",
+    alignItems:"center",
   },
   icon: {
     fontSize: 18,
@@ -168,39 +182,4 @@ const styles = StyleSheet.create({
     padding: 5,
     color: '#fffdff',
   },
-  iconSmall: {
-    fontSize: 26,
-    marginRight: 10,
-    padding: 5,
-    color: '#fffdff',
-    justifyContent: 'center',
-    marginLeft: 7,
-  },
-  firstRow: {
-    flex: 1,
-    marginLeft: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  content: {
-    backgroundColor: 'white',
-  },
-  topHeader: {
-    flex: 1,
-    marginLeft: 25,
-    marginTop: 15,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  middleRow: {
-    flex:1,
-  },
-  bottomRow: {
-    borderRadius: 20,
-    marginLeft: 15,
-    backgroundColor: '#131626',
-    marginRight: 0,
-    width: 380,
-  }
 });

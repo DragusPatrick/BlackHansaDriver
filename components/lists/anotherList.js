@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
-class list_finished extends PureComponent {
+class AnotherList extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -53,7 +53,7 @@ class list_finished extends PureComponent {
                                source={require('../../assets/images/icons-14.png')} />
                     </View>
                 </View>
-                <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -16}}>
+                <View style={{zIndex: 1,shadowColor: '#64D811', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -16}}>
 
                 </View>
             </View>
@@ -62,7 +62,7 @@ class list_finished extends PureComponent {
     }
 }
 
-export default list_finished;
+export default AnotherList;
 
 const styles = StyleSheet.create({
     container: {
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
     box: {
         backgroundColor: '#000',
         zIndex: 2,
-        shadowColor: "#FBAF42",
+        shadowColor: "#64D811",
         shadowOffset: {
             width: 0,
-            height: 5,
+            height: 12,
         },
         shadowOpacity: 0.53,
         shadowRadius: 13.97,
@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:"center",
         alignItems:"center",
-        marginLeft: 10,
     },
     icon: {
         fontSize: 18,
