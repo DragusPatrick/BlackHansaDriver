@@ -18,7 +18,17 @@ var height = Dimensions.get('window').height; //full height
 
 class HomeScreen extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      content: false
+    }
+  }
 
+  componentHideAndShow = () => {
+    this.setState(previousState => ({
+      content: !previousState.content }))
+  }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -28,22 +38,27 @@ class HomeScreen extends React.Component {
           <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
             <TouchableOpacity onPress={() => navigate('Home')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-44.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Offers')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-45.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Planned')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-46.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Settings')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-47.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigate('Settings')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/menu/2_V3-48.png')} />
             </TouchableOpacity>
           </View>
 
@@ -62,27 +77,69 @@ class HomeScreen extends React.Component {
 
 
           <View>
-            <View style={styles.box}>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={styles.iconImg}
-                       source={require('../assets/images/icons-13.png')} />
-                <Text style={styles.headerText}>Lorem Ipsum Dolor</Text>
-              </View>
+            <TouchableOpacity onPress={this.componentHideAndShow}>
+              <View style={styles.box}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                  <Image style={styles.iconImg}
+                         source={require('../assets/images/menu/2_V3-50.png')} />
+                  <Text style={styles.headerText}>Lorem Ipsum Dolor</Text>
+                </View>
 
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{textAlign: 'center', color: '#fffdff', fontWeight: '600', fontSize: 18}}>
-                  <Icon
-                      name="ios-star"
-                      color="#dbdce0"
-                      size={20}
-                      style={styles.icon}
-                  /> 4.8
-                </Text>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{textAlign: 'center', color: '#fffdff', fontWeight: '600', fontSize: 18}}>
+                    <Icon
+                        name="ios-star"
+                        color="#FBAF42"
+                        size={20}
+                        style={styles.icon}
+                    /> 4.8
+                  </Text>
+                </View>
               </View>
-            </View>
-            <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
+              <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
 
-            </View>
+              </View>
+              {
+                this.state.content ?
+                    <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 200, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30, }}>
+                      <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
+                        <View style={{flexDirection: 'row', marginBottom: 10}}>
+                          <Icon
+                              name="ios-star"
+                              color="#dbdce0"
+                              size={20}
+                              style={styles.mediumIcon}
+                          />
+                          <View>
+                            <Text style={{color: '#fff'}}>Chauffeur</Text>
+                            <Text style={{color: '#000'}}>4.9 based on 14 ratings</Text>
+                          </View>
+
+                        </View>
+
+                        <View style={{flexDirection: 'row'}}>
+                          <Icon
+                              name="ios-star"
+                              color="#dbdce0"
+                              size={20}
+                              style={styles.mediumIcon}
+                          />
+                          <View>
+                            <Text style={{color: '#fff'}}>Vehicle</Text>
+                            <Text style={{color: '#000'}}>5.0 based on 21 ratings</Text>
+                          </View>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15, textAlign: 'center'}}>
+                          <View style={{textAlign: 'center', justifyContent: 'center',}}>
+                            <Text style={{color: '#fff', fontSize: 21, fontWeight: '700',textAlign: 'center'}}>4.9 / 5.0</Text>
+                            <Text style={{color: '#000',textAlign: 'center'}}>Based on 56 ratings</Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View> : null
+              }
+            </TouchableOpacity>
           </View>
         </View>
     );
@@ -112,8 +169,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 10,
   },
+  mediumIcon: {
+    fontSize: 22,
+    marginRight: 10,
+    padding: 5,
+    color: '#fffdff',
+  },
   box: {
-    backgroundColor: '#000',
+    backgroundColor: '#080808',
     zIndex: 2,
     shadowColor: "#FBAF42",
     shadowOffset: {
@@ -180,6 +243,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginRight: 10,
     padding: 5,
-    color: '#fffdff',
+    color: '#FBAF42',
   },
 });

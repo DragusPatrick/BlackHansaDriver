@@ -9,9 +9,8 @@ class list_finished extends PureComponent {
 
     constructor(props) {
         super(props);
-
-        state = {
-            driver_id: "bar"
+        this.state = {
+            content: false
         }
 
         this.data = props.data;
@@ -24,38 +23,86 @@ class list_finished extends PureComponent {
         }
     }
 
+    componentHideAndShow = () => {
+        this.setState(previousState => ({
+            content: !previousState.content }))
+    }
+
     render() {
         return (
             <View style={{ width: width-30 }}>
-                <View style={styles.box}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={styles.iconImg}
-                               source={require('../../assets/images/icons-13.png')} />
+                <TouchableOpacity onPress={this.componentHideAndShow}>
+                    <View style={styles.box}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image style={styles.iconImg}
+                                   source={require('../../assets/images/mail_V3-40.png')} />
 
-                        <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 15 }}>
-                            <View style={{marginBottom: 5}}>
-                                <Text style={{ color: '#CA8D37', fontSize: 12 }}>16:40 - 9 Dec 2019</Text>
-                            </View>
+                            <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 15 }}>
+                                <View style={{marginBottom: 5}}>
+                                    <Text style={{ color: '#FBAF42', fontSize: 12 }}>16:40 - 9 Dec 2019</Text>
+                                </View>
 
-                            <View>
-                                <Text style={{ color: '#fff' }}>{this.data.vehicle.bussiness_type}</Text>
-                                <Text style={{ color: '#fff', fontWeight: '600' }}>5542314234</Text>
-                            </View>
+                                <View>
+                                    <Text style={{ color: '#fff' }}>First Class</Text>
+                                    <Text style={{ color: '#fff', fontWeight: '600' }}>5542314234</Text>
+                                </View>
 
-                            <View style={{marginTop: 5}}>
-                                <Text style={{ color: '#CA8D37', fontSize: 12 }}>EUR {this.data.price} - ca. 28km</Text>
+                                <View style={{marginTop: 5}}>
+                                    <Text style={{ color: '#FBAF42', fontSize: 12 }}>EUR {this.data.price} - ca. 28km</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
 
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={{ width: 35, height: 35 }}
-                               source={require('../../assets/images/icons-14.png')} />
+                        <View style={{ justifyContent: 'center', alignItems: 'center', borderLeftColor: '#333333', borderLeftWidth: 1,}}>
+                            <Image style={{ width: 35, height: 35, marginLeft: 25 }}
+                                   source={require('../../assets/images/mail_V3-29.png')} />
+                        </View>
                     </View>
-                </View>
-                <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -16}}>
+                    <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 15, marginRight: 15, marginTop: -16}}>
 
-                </View>
+                    </View>
+                    {
+                        this.state.content ?
+                            <View style={{flexDirection: 'row', zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#fff',height: 225, borderRadius: 15, marginLeft: 15, marginRight: 15, marginTop: -30, }}>
+                                <View style={{flexDirection: 'column',marginTop: 5, paddingLeft: 0, paddingRight: 45, width:'80%'}}>
+                                    <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 0, paddingRight: 45, width:'80%'}}>
+                                        <View style={{flexDirection: 'row', marginBottom: 10}}>
+                                            <View style={{alignItems: 'center', marginRight: 10, marginLeft:15, paddingTop: 3}}>
+                                                <Image style={{ width: 25, height: 25 }}
+                                                       source={require('../../assets/images/mail_V3-53.png')} />
+                                            </View>
+                                            <View style={{flexDirection: 'column'}}>
+                                                <Text style={{color: '#A2A2A2', fontWeight: '300', fontSize: 13}}>Pickup up location</Text>
+                                                <Text style={{color: '#000',fontSize: 14}}>{this.data.pickup_address}</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={{flexDirection: 'column',  marginTop: 15, paddingLeft: 0, paddingRight: 45, width:'80%'}}>
+                                        <View style={{flexDirection: 'row', marginBottom: 10}}>
+                                            <View style={{alignItems: 'center', marginRight: 10, marginLeft:15, paddingTop: 3}}>
+                                                <Image style={{ width: 25, height: 25 }}
+                                                       source={require('../../assets/images/mail_V3-54.png')} />
+                                            </View>
+                                            <View style={{flexDirection: 'column'}}>
+                                                <Text style={{color: '#A2A2A2', fontWeight: '300', fontSize: 13}}>Drop off location</Text>
+                                                <Text style={{color: '#000',fontSize: 14}}>{this.data.pickup_address}</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
+
+
+                                <View style={{backgroundColor: '#0D0D0D', width:'20%',borderBottomRightRadius: 15,flexDirection: 'column', justifyContent: 'space-between', paddingTop:45, paddingBottom: 15, alignItems: 'center'}}>
+                                    <Image style={{ width: 30, height: 30 }}
+                                           source={require('../../assets/images/mail_V3-32.png')} />
+
+                                    <Image style={{ width: 30, height: 30 }}
+                                           source={require('../../assets/images/mail_V3-30.png')} />
+                                </View>
+                            </View> : null
+                    }
+                </TouchableOpacity>
             </View>
         )
 
@@ -87,7 +134,7 @@ const styles = StyleSheet.create({
         shadowColor: "#FBAF42",
         shadowOffset: {
             width: 0,
-            height: 5,
+            height: 12,
         },
         shadowOpacity: 0.53,
         shadowRadius: 13.97,
@@ -144,7 +191,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:"center",
         alignItems:"center",
-        marginLeft: 10,
     },
     icon: {
         fontSize: 18,

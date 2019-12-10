@@ -1,14 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text, ScrollView, Dimensions, FlatList, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, ScrollView, Dimensions, TouchableOpacity, Image} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { List, ListItem } from "native-base";
 import List_planned  from '../components/lists/list_planned';
-import List_withoutDriver  from '../components/lists/withoutDriver';
+
 var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
 
 class PlannedScreen extends React.Component {
-
     constructor(props){
         super(props);
         this.state = { isLoading: true }
@@ -35,14 +33,12 @@ class PlannedScreen extends React.Component {
     renderTrip({ item, index }) {
         return (
             <View>
-
                 <Icon
                     name='favorite'
                     size={25}
                     color={item.liked ? 'red' : 'gray'}
                     onPress={() => this.onLikePost({ item, index })}
                 />
-
             </View>
         );
     }
@@ -55,22 +51,27 @@ class PlannedScreen extends React.Component {
                 <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
                     <TouchableOpacity onPress={() => navigate('Home')}>
                         <Image style={{ width: 35, height: 35,  }}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/menu/2_V3-44.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigate('Offers')}>
                         <Image style={{ width: 35, height: 35,  }}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/menu/2_V3-45.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigate('Planned')}>
                         <Image style={{ width: 35, height: 35,  }}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/menu/2_V3-46.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigate('Settings')}>
                         <Image style={{ width: 35, height: 35,  }}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/menu/2_V3-47.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigate('Settings')}>
+                        <Image style={{ width: 35, height: 35,  }}
+                               source={require('../assets/images/menu/2_V3-48.png')} />
                     </TouchableOpacity>
                 </View>
 

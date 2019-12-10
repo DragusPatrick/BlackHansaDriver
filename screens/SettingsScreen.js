@@ -41,22 +41,27 @@ class SettingsScreen extends React.Component {
           <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
             <TouchableOpacity onPress={() => navigate('Home')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-44.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Offers')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-45.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Planned')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-46.png')} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigate('Settings')}>
               <Image style={{ width: 35, height: 35,  }}
-                     source={require('../assets/images/icons-13.png')} />
+                     source={require('../assets/images/menu/2_V3-47.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigate('Settings')}>
+              <Image style={{ width: 35, height: 35,  }}
+                     source={require('../assets/images/menu/2_V3-48.png')} />
             </TouchableOpacity>
           </View>
 

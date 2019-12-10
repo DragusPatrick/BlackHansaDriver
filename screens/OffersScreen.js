@@ -1,8 +1,9 @@
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { List, ListItem } from "native-base";
 import Icon from "react-native-vector-icons/Ionicons";
-import List_withoutDriver  from '../components/lists/withoutDriver';
+import { CheckBox } from 'react-native-elements'
+
+
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
@@ -10,25 +11,22 @@ class OffersScreen extends React.Component  {
 
   constructor(props){
     super(props);
-    this.state ={ isLoading: true}
+    this.state = {
+      isLoading: true,
+      content: false,
+      content1: false,
+      checked: false,
+    }
   }
 
-  componentDidMount(){
-    return fetch('https://app.blackhansa.de/test')
-        .then((response) => response.json())
-        .then((responseJson) => {
+  componentHideAndShow = () => {
+    this.setState(previousState => ({
+      content: !previousState.content }))
+  }
 
-          this.setState({
-            isLoading: false,
-            dataSource: responseJson,
-          }, function(){
-
-          });
-
-        })
-        .catch((error) =>{
-          console.error(error);
-        });
+  component1HideAndShow = () => {
+    this.setState(previousState => ({
+      content1: !previousState.content1 }))
   }
 
   renderTrip({ item, index }) {
@@ -52,25 +50,30 @@ class OffersScreen extends React.Component  {
           <View style={styles.container}>
 
             <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
-              <TouchableOpacity onPress={() => navigate('Home')}>
-                <Image style={{ width: 35, height: 35,  }}
-                       source={require('../assets/images/icons-13.png')} />
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Home')}>
+                    <Image style={{ width: 35, height: 35,  }}
+                           source={require('../assets/images/menu/2_V3-44.png')} />
+                </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigate('Offers')}>
-                <Image style={{ width: 35, height: 35,  }}
-                       source={require('../assets/images/icons-13.png')} />
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Offers')}>
+                    <Image style={{ width: 35, height: 35,  }}
+                           source={require('../assets/images/menu/2_V3-45.png')} />
+                </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigate('Planned')}>
-                <Image style={{ width: 35, height: 35,  }}
-                       source={require('../assets/images/icons-13.png')} />
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Planned')}>
+                    <Image style={{ width: 35, height: 35,  }}
+                           source={require('../assets/images/menu/2_V3-46.png')} />
+                </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigate('Settings')}>
-                <Image style={{ width: 35, height: 35,  }}
-                       source={require('../assets/images/icons-13.png')} />
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Settings')}>
+                    <Image style={{ width: 35, height: 35,  }}
+                           source={require('../assets/images/menu/2_V3-47.png')} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigate('Settings')}>
+                    <Image style={{ width: 35, height: 35,  }}
+                           source={require('../assets/images/menu/2_V3-48.png')} />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.headerLogo}>
@@ -85,49 +88,132 @@ class OffersScreen extends React.Component  {
             <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42', height: 12, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, marginLeft: 40, marginRight: 40, marginTop: 0, opacity: 0.2}}>
 
             </View>
+                <View>
+                  <TouchableOpacity onPress={this.componentHideAndShow}>
+                    <View style={styles.box}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <Image style={styles.iconImg}
+                               source={require('../assets/images/icons-13.png')} />
+                        <Text style={styles.headerText}>Details</Text>
+                      </View>
+                    </View>
+                    <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
 
-            <ScrollView>
-              <View>
-                <View style={styles.box}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Image style={styles.iconImg}
-                           source={require('../assets/images/icons-13.png')} />
-                    <Text style={styles.headerText}>Details</Text>
+                    </View>
+                  {
+                    this.state.content ?
+                        <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 190, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30, }}>
+                          <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
+                            <View style={{flexDirection: 'row', marginBottom: 10}}>
+                              <View style={{flexDirection: 'column'}}>
+                                <Text style={{color: '#fff', fontWeight: '500'}}>Name</Text>
+                                <Text style={{color: '#000'}}>Dragus Patrick</Text>
+                              </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', marginBottom: 10}}>
+                              <View style={{flexDirection: 'column'}}>
+                                <Text style={{color: '#fff', fontWeight: '500'}}>Phone Number</Text>
+                                <Text style={{color: '#000'}}>0756 770 122</Text>
+                              </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', marginBottom: 10}}>
+                              <View style={{flexDirection: 'column'}}>
+                                <Text style={{color: '#fff', fontWeight: '500'}}>Email Address</Text>
+                                <Text style={{color: '#000'}}>contact@codixital.com</Text>
+                              </View>
+                            </View>
+                          </View>
+                        </View> : null
+                  }
+                  </TouchableOpacity>
+                </View>
+
+
+
+                <View>
+                  <TouchableOpacity onPress={this.component1HideAndShow}>
+                    <View style={styles.box}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <Image style={styles.iconImg}
+                               source={require('../assets/images/icons-13.png')} />
+                        <Text style={styles.headerText}>Vehicles</Text>
+                      </View>
+                    </View>
+
+                  <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
+
                   </View>
-                </View>
-                <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
+                    {
+                      this.state.content1 ?
+                          <View style={{ zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 225, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30 }}>
+                            <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
+                              <View style={{flexDirection: 'row', marginBottom: 10}}>
+                                <CheckBox
+                                    center
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    checked={this.state.checked}
+                                    checkedColor='#fff'
+                                    uncheckedColor='#fff'
+                                    onPress={() => this.setState({checked: !this.state.checked})}
+                                />
+                                <View style={{flexDirection: 'column'}}>
+                                  <Text style={{color: '#fff', fontWeight: '500'}}>Luxury Class</Text>
+                                  <Text style={{color: '#000'}}>MAYBACH</Text>
+                                </View>
+                              </View>
 
-                </View>
-              </View>
+                              <View style={{flexDirection: 'row'}}>
+                                <CheckBox
+                                    center
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    checked={this.state.checked}
+                                    checkedColor='#fff'
+                                    uncheckedColor='#fff'
+                                    onPress={() => this.setState({checked: !this.state.checked})}
+                                />
+                                <View style={{flexDirection: 'column'}}>
+                                  <Text style={{color: '#fff', fontWeight: '500'}}>First Class</Text>
+                                  <Text style={{color: '#000'}}>Mercedes Benz S Class</Text>
+                                </View>
+                              </View>
 
-              <View>
-                <View style={styles.box}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Image style={styles.iconImg}
-                           source={require('../assets/images/icons-13.png')} />
-                    <Text style={styles.headerText}>Vehicles</Text>
+                              <View style={{flexDirection: 'row'}}>
+                                <CheckBox
+                                    center
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    checked={this.state.checked}
+                                    checkedColor='#fff'
+                                    uncheckedColor='#fff'
+                                    onPress={() => this.setState({checked: !this.state.checked})}
+                                />
+                                <View style={{flexDirection: 'column'}}>
+                                  <Text style={{color: '#fff', fontWeight: '500'}}>Luxury Class</Text>
+                                  <Text style={{color: '#000'}}>MAYBACH</Text>
+                                </View>
+                              </View>
+                            </View>
+                          </View> : null
+                    }
+                  </TouchableOpacity>
+                </View>
+
+                <View>
+                  <View style={styles.box}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                      <Image style={styles.iconImg}
+                             source={require('../assets/images/icons-13.png')} />
+                      <Text style={styles.headerText}>Log Out</Text>
+                    </View>
                   </View>
+                  {/*<View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>*/}
+
+                  {/*</View>*/}
                 </View>
-                <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
-
-                </View>
-              </View>
-
-              <View>
-                <View style={styles.box}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Image style={styles.iconImg}
-                           source={require('../assets/images/icons-13.png')} />
-                    <Text style={styles.headerText}>Log Out</Text>
-                  </View>
-                </View>
-                <View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>
-
-                </View>
-              </View>
-
-
-            </ScrollView>
           </View>
       )
   }
