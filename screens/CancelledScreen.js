@@ -2,11 +2,11 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Dimensions, ActivityIndicator, TouchableOpacity, Image, Text} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { List, ListItem } from "native-base";
-import List_planned  from '../components/lists/list_planned';
+import Cancelled_list  from '../components/lists/cancelled';
 
 var width = Dimensions.get('window').width; //full width
 
-class PlannedScreen extends React.Component {
+class CancelledScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -15,13 +15,13 @@ class PlannedScreen extends React.Component {
     }
 
     componentDidMount(){
-        return fetch('https://app.blackhansa.de/api/v2/bookings/pending')
+        return fetch('https://app.blackhansa.de/api/v2/bookings/ended')
             .then((response) => response.json())
             .then((responseJson) => {
 
                 this.setState({
                     isLoading: false,
-                    dataSource: responseJson.model.data,
+                    dataSource: responseJson.model,
                 }, function(){
 
                 });
@@ -60,31 +60,31 @@ class PlannedScreen extends React.Component {
             <View style={styles.container}>
                 <View style={{ position: 'absolute', top: 75, width: width - 100, zIndex: 50, marginLeft: 50, marginRight: 50, flexDirection: 'row', justifyContent: 'space-between'}}>
                     <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
-                        <Image style={{ width: 30, height: 30, opacity: 0.4}}
+                        <Image style={{ width: 30, height: 30, opacity: 0.6}}
                                source={require('../assets/images/menu/2_V3-44.png')} />
                         <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Home</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Planned')}>
-                        <Image style={{ width: 30, height: 30, opacity: 1}}
+                        <Image style={{ width: 30, height: 30, opacity: 0.6}}
                                source={require('../assets/images/menu/2_V3-45.png')} />
-                        <Text style={{color: '#fff', fontSize: 9, fontWeight: '800', paddingTop: 5}}>Pending</Text>
+                        <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Pending</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Settings')}>
-                        <Image style={{ width: 30, height: 30, opacity: 0.4}}
+                        <Image style={{ width: 30, height: 30, opacity: 0.6}}
                                source={require('../assets/images/menu/2_V3-46.png')} />
                         <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Accepted</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Cancelled')}>
-                        <Image style={{ width: 30, height: 30, opacity: 0.4}}
+                        <Image style={{ width: 30, height: 30, opacity: 1}}
                                source={require('../assets/images/menu/2_V3-47.png')} />
-                        <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Ended</Text>
+                        <Text style={{color: '#fff', fontSize: 9, fontWeight: '800', paddingTop: 5}}>Ended</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Offers')}>
-                        <Image style={{ width: 30, height: 30, opacity: 0.4}}
+                        <Image style={{ width: 30, height: 30, opacity: 0.6}}
                                source={require('../assets/images/menu/2_V3-48.png')} />
                         <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Profile</Text>
                     </TouchableOpacity>
@@ -105,8 +105,6 @@ class PlannedScreen extends React.Component {
                     </View>
                 </View>
 
-
-
                 <ScrollView style={{ width: width }}>
                     <List
                         dataArray={this.state.dataSource}
@@ -115,7 +113,7 @@ class PlannedScreen extends React.Component {
                         renderRow={(item) => {
                             return (
                                 <ListItem style={{ borderBottomWidth: 0, width: width }}>
-                                    <List_planned data={item} />
+                                    <Cancelled_list data={item} />
                                 </ListItem>
                             )
                         }
@@ -127,9 +125,9 @@ class PlannedScreen extends React.Component {
     }
 }
 
-export default PlannedScreen;
+export default CancelledScreen;
 
-PlannedScreen.navigationOptions = {
+CancelledScreen.navigationOptions = {
     header: null,
 };
 
@@ -206,9 +204,10 @@ const styles = StyleSheet.create({
     logo: {
         width:'60%',
         height: 40,
+        flexDirection: 'row',
         justifyContent:"center",
         alignItems:"center",
-        marginTop: 55,
+        marginTop: 55
     },
     iconImg: {
         width: 50,

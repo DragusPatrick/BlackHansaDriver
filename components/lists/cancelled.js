@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import {StyleSheet, View, Text, Dimensions, TouchableOpacity, Linking, Image} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, TouchableOpacity, Image} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
-import openMap from 'react-native-open-maps';
 
 var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
-class list_finished extends PureComponent {
+class Cancelled extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -28,21 +28,6 @@ class list_finished extends PureComponent {
             content: !previousState.content }))
     }
 
-    openMap= () => {
-        console.log('open directions')
-        let f = Platform.select({
-            ios: () => {
-                Linking.openURL('http://maps.apple.com/maps?daddr=38.7875851,-9.3906089');
-            },
-            android: () => {
-                console.log('ANDROID')
-                Linking.openURL('http://maps.google.com/maps?daddr=38.7875851,-9.3906089').catch(err => console.error('An error occurred', err));
-            }
-        });
-
-        f();
-    }
-
     render() {
         return (
             <View style={{ width: width-30 }}>
@@ -57,7 +42,7 @@ class list_finished extends PureComponent {
 
                             <View style={{ flexDirection: 'column', justifyContent: 'space-between', paddingLeft: 25 }}>
                                 <View style={{marginBottom: 7}}>
-                                    <Text style={{ color: '#9B9B9D', fontSize: 12, }}>{this.data.pickup_hour}:{this.data.pickup_min} - 9 Dec 2019</Text>
+                                    <Text style={{ color: '#AD77FF', fontSize: 12, }}>{this.data.pickup_hour}:{this.data.pickup_min} - 9 Dec 2019</Text>
                                 </View>
 
                                 <View>
@@ -66,7 +51,7 @@ class list_finished extends PureComponent {
                                 </View>
 
                                 <View style={{marginTop: 7}}>
-                                    <Text style={{ color: '#9B9B9D', fontSize: 12 }}>EUR {this.data.price} - ca. 28km</Text>
+                                    <Text style={{ color: '#AD77FF', fontSize: 12 }}>EUR {this.data.price} - ca. 28km</Text>
                                 </View>
                             </View>
                         </View>
@@ -78,18 +63,18 @@ class list_finished extends PureComponent {
 
                         <View style={{ justifyContent: 'center', alignItems: 'center', borderLeftColor: '#333333', borderLeftWidth: 1,}}>
                             <Image style={{ width: 35, height: 35, marginLeft: 25 }}
-                                   source={require('../../assets/images/mail_V3-29.png')} />
+                                   source={require('../../assets/images/mail_V3-33.png')} />
                         </View>
 
                     </View>
-                    <View style={{zIndex: 1,shadowColor: '#9B9B9D', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#9B9B9D',height: 25, borderRadius: 20, marginLeft: 15, marginRight: 15, marginTop: -16}}>
+                    <View style={{zIndex: 1,shadowColor: '#AD77FF', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#674798',height: 25, borderRadius: 20, marginLeft: 15, marginRight: 15, marginTop: -16}}>
 
                     </View>
                     {
                         this.state.content ?
-                            <View style={{flexDirection: 'row', zIndex: 1,shadowColor: '#9B9B9D', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#fff',height: 220, borderRadius: 15, marginLeft: 15, marginRight: 15, marginTop: -30, }}>
-                                <View style={{flexDirection: 'column',marginTop: 5, paddingLeft: 0, paddingRight: 45, width:'80%'}}>
-                                    <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 0, paddingRight: 45, width:'80%'}}>
+                            <View style={{flexDirection: 'row', zIndex: 1,shadowColor: '#AD77FF', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#fff',height: 'auto', borderRadius: 15, marginLeft: 15, marginRight: 15, marginTop: -30, }}>
+                                <View style={{flexDirection: 'column',marginTop: 5, paddingLeft: 0, paddingRight: 45, width:'80%', paddingBottom: 15}}>
+                                    <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 0, paddingRight: 65, width:'80%'}}>
                                         <View style={{flexDirection: 'row', marginBottom: 10}}>
                                             <View style={{alignItems: 'center', marginRight: 10, marginLeft:15, paddingTop: 3}}>
                                                 <Image style={{ width: 25, height: 25 }}
@@ -110,7 +95,7 @@ class list_finished extends PureComponent {
                                             </View>
                                             <View style={{flexDirection: 'column'}}>
                                                 <Text style={{color: '#A2A2A2', fontWeight: '300', fontSize: 11}}>Drop off location</Text>
-                                                <Text style={{color: '#000',fontSize: 12}}>{this.data.drop_address}</Text>
+                                                <Text style={{color: '#000',fontSize: 12}}>{this.data.pickup_address}</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -141,7 +126,6 @@ class list_finished extends PureComponent {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-
                             </View> : null
                     }
                 </TouchableOpacity>
@@ -151,7 +135,7 @@ class list_finished extends PureComponent {
     }
 }
 
-export default list_finished;
+export default Cancelled;
 
 const styles = StyleSheet.create({
     container: {
@@ -173,7 +157,7 @@ const styles = StyleSheet.create({
     box: {
         backgroundColor: '#000',
         zIndex: 2,
-        shadowColor: "#9B9B9D",
+        shadowColor: "#AD77FF",
         shadowOffset: {
             width: 0,
             height: 12,
@@ -186,7 +170,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderRadius: 15,
-        marginTop: 0,
+        marginTop: 0
     },
     boxContent: {
         padding: 15,
@@ -231,9 +215,8 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         flexDirection: 'row',
-        justifyContent: "center",
-        alignItems: "center",
-
+        justifyContent:"center",
+        alignItems:"center",
     },
     icon: {
         fontSize: 18,

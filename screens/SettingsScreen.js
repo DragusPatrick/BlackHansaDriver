@@ -1,12 +1,10 @@
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import HomeScreen from "./HomeScreen";
 import { List, ListItem } from "native-base";
 import AnotherList from "../components/lists/anotherList";
-import PlannedScreen from "./PlannedScreen";
+import ModalDropdown from 'react-native-modal-dropdown';
+
 var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
 
 class SettingsScreen extends React.Component {
 
@@ -16,13 +14,13 @@ class SettingsScreen extends React.Component {
   }
 
   componentDidMount(){
-    return fetch('https://app.blackhansa.de/test')
+    return fetch('https://app.blackhansa.de/api/v2/bookings/onway')
         .then((response) => response.json())
         .then((responseJson) => {
 
           this.setState({
             isLoading: false,
-            dataSource: responseJson,
+            dataSource: responseJson.model.data,
           }, function(){
 
           });
@@ -37,50 +35,59 @@ class SettingsScreen extends React.Component {
     const {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
-
-          <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
-            <TouchableOpacity onPress={() => navigate('Home')}>
-              <Image style={{ width: 35, height: 35,  }}
+          <View style={{ position: 'absolute', top: 75, width: width - 100, zIndex: 50, marginLeft: 50, marginRight: 50, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-44.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Home</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Offers')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Planned')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-45.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Pending</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Planned')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Settings')}>
+              <Image style={{ width: 30, height: 30, opacity: 1}}
                      source={require('../assets/images/menu/2_V3-46.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '800', paddingTop: 5}}>Accepted</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Settings')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Cancelled')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-47.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Ended </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Settings')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Offers')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-48.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Profile</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.headerLogo}>
-            <Image style={styles.logo}
-                   source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
+          <View style={{flexDirection: 'row', width:'100%', marginTop: 50 }}>
+            <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, backgroundColor: '#FBAF42',width: 25, height: 165, borderRadius: 20, marginTop: 35, marginLeft: -10, marginRight: 20, opacity: 0.6}}>
+
+            </View>
+
+            <View style={styles.headerLogo}>
+              <Image style={styles.logo}
+                     source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
+            </View>
+
+            <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, backgroundColor: '#FBAF42',width: 25, height: 165, borderRadius: 20, marginTop: 35, marginLeft: 20, marginRight: -10, opacity: 0.6}}>
+
+            </View>
           </View>
 
-          <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -13, opacity: 0.6}}>
 
-          </View>
-
-          <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42', height: 12, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, marginLeft: 40, marginRight: 40, marginTop: 0, opacity: 0.2}}>
-          </View>
-
-          <ScrollView style={{ width: width }}>
+          <ScrollView style={{ width: width, marginTop: 10 }}>
             <List
                 dataArray={this.state.dataSource}
                 extraData={this.state}
+                keyExtractor={(item, index) => index.toString()}
                 renderRow={(item) => {
                   return (
                       <ListItem style={{ borderBottomWidth: 0, width: width }}>
@@ -111,13 +118,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FBAF42',
-    height: '30%',
+    height: 225,
+    width: width - 70,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
     shadowColor: '#FBAF42',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 10,
+    marginBottom: 15
   },
   box: {
     backgroundColor: '#000',
@@ -171,10 +182,9 @@ const styles = StyleSheet.create({
   logo: {
     width:'60%',
     height: 40,
-    flexDirection: 'row',
     justifyContent:"center",
     alignItems:"center",
-    marginTop: 65
+    marginTop: 55,
   },
   iconImg: {
     width: 50,

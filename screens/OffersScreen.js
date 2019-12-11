@@ -1,8 +1,8 @@
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
-import { CheckBox } from 'react-native-elements'
-
+import { CheckBox } from 'react-native-elements';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -49,51 +49,59 @@ class OffersScreen extends React.Component  {
       return (
           <View style={styles.container}>
 
-            <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
-                <TouchableOpacity onPress={() => navigate('Home')}>
-                    <Image style={{ width: 35, height: 35,  }}
-                           source={require('../assets/images/menu/2_V3-44.png')} />
-                </TouchableOpacity>
+              <View style={{ position: 'absolute', top: 75, width: width - 100, zIndex: 50, marginLeft: 50, marginRight: 50, flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
+                      <Image style={{ width: 30, height: 30, opacity: 0.6}}
+                             source={require('../assets/images/menu/2_V3-44.png')} />
+                      <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Home</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigate('Offers')}>
-                    <Image style={{ width: 35, height: 35,  }}
-                           source={require('../assets/images/menu/2_V3-45.png')} />
-                </TouchableOpacity>
+                  <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Planned')}>
+                      <Image style={{ width: 30, height: 30, opacity: 0.6}}
+                             source={require('../assets/images/menu/2_V3-45.png')} />
+                      <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Pending</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigate('Planned')}>
-                    <Image style={{ width: 35, height: 35,  }}
-                           source={require('../assets/images/menu/2_V3-46.png')} />
-                </TouchableOpacity>
+                  <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Settings')}>
+                      <Image style={{ width: 30, height: 30, opacity: 0.6}}
+                             source={require('../assets/images/menu/2_V3-46.png')} />
+                      <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Accepted</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigate('Settings')}>
-                    <Image style={{ width: 35, height: 35,  }}
-                           source={require('../assets/images/menu/2_V3-47.png')} />
-                </TouchableOpacity>
+                  <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Cancelled')}>
+                      <Image style={{ width: 30, height: 30, opacity: 0.6}}
+                             source={require('../assets/images/menu/2_V3-47.png')} />
+                      <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Ended</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigate('Settings')}>
-                    <Image style={{ width: 35, height: 35,  }}
-                           source={require('../assets/images/menu/2_V3-48.png')} />
-                </TouchableOpacity>
-            </View>
+                  <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Offers')}>
+                      <Image style={{ width: 30, height: 30, opacity: 1}}
+                             source={require('../assets/images/menu/2_V3-48.png')} />
+                      <Text style={{color: '#fff', fontSize: 9, fontWeight: '800', paddingTop: 5}}>Profile</Text>
+                  </TouchableOpacity>
+              </View>
 
-            <View style={styles.headerLogo}>
-              <Image style={styles.logo}
-                     source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
-            </View>
+              <View style={{flexDirection: 'row', width:'100%', marginTop: 50 }}>
+                  <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, backgroundColor: '#FBAF42',width: 25, height: 165, borderRadius: 20, marginTop: 35, marginLeft: -10, marginRight: 20, opacity: 0.6}}>
 
-            <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 20, marginRight: 20, marginTop: -13, opacity: 0.6}}>
+                  </View>
 
-            </View>
+                  <View style={styles.headerLogo}>
+                      <Image style={styles.logo}
+                             source={require('../assets/images/email-logo.png')} resizeMode="contain"/>
+                  </View>
 
-            <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.8, shadowRadius: 10, backgroundColor: '#FBAF42', height: 12, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, marginLeft: 40, marginRight: 40, marginTop: 0, opacity: 0.2}}>
+                  <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, backgroundColor: '#FBAF42',width: 25, height: 165, borderRadius: 20, marginTop: 35, marginLeft: 20, marginRight: -10, opacity: 0.6}}>
 
-            </View>
+                  </View>
+              </View>
+
                 <View>
                   <TouchableOpacity onPress={this.componentHideAndShow}>
                     <View style={styles.box}>
                       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Image style={styles.iconImg}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/2_V3-50.png')} />
                         <Text style={styles.headerText}>Details</Text>
                       </View>
                     </View>
@@ -106,21 +114,21 @@ class OffersScreen extends React.Component  {
                           <View style={{flexDirection: 'column',  marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
                             <View style={{flexDirection: 'row', marginBottom: 10}}>
                               <View style={{flexDirection: 'column'}}>
-                                <Text style={{color: '#fff', fontWeight: '500'}}>Name</Text>
+                                <Text style={{color: '#fff', fontWeight: '500', fontSize: 12 }}>Name</Text>
                                 <Text style={{color: '#000'}}>Dragus Patrick</Text>
                               </View>
                             </View>
 
                             <View style={{flexDirection: 'row', marginBottom: 10}}>
                               <View style={{flexDirection: 'column'}}>
-                                <Text style={{color: '#fff', fontWeight: '500'}}>Phone Number</Text>
+                                <Text style={{color: '#fff', fontWeight: '500', fontSize: 12}}>Phone Number</Text>
                                 <Text style={{color: '#000'}}>0756 770 122</Text>
                               </View>
                             </View>
 
                             <View style={{flexDirection: 'row', marginBottom: 10}}>
                               <View style={{flexDirection: 'column'}}>
-                                <Text style={{color: '#fff', fontWeight: '500'}}>Email Address</Text>
+                                <Text style={{color: '#fff', fontWeight: '500', fontSize: 12}}>Email Address</Text>
                                 <Text style={{color: '#000'}}>contact@codixital.com</Text>
                               </View>
                             </View>
@@ -137,7 +145,7 @@ class OffersScreen extends React.Component  {
                     <View style={styles.box}>
                       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Image style={styles.iconImg}
-                               source={require('../assets/images/icons-13.png')} />
+                               source={require('../assets/images/2_V3-49.png')} />
                         <Text style={styles.headerText}>Vehicles</Text>
                       </View>
                     </View>
@@ -161,7 +169,7 @@ class OffersScreen extends React.Component  {
                                 />
                                 <View style={{flexDirection: 'column'}}>
                                   <Text style={{color: '#fff', fontWeight: '500'}}>Luxury Class</Text>
-                                  <Text style={{color: '#000'}}>MAYBACH</Text>
+                                    <ModalDropdown options={['GL 02 DRA']}/>
                                 </View>
                               </View>
 
@@ -177,7 +185,7 @@ class OffersScreen extends React.Component  {
                                 />
                                 <View style={{flexDirection: 'column'}}>
                                   <Text style={{color: '#fff', fontWeight: '500'}}>First Class</Text>
-                                  <Text style={{color: '#000'}}>Mercedes Benz S Class</Text>
+                                  <ModalDropdown options={['BG 5234532 ASD', 'BG 5234532 ASD','BG 5234532 ASD', 'BG 5234532 ASD']}/>
                                 </View>
                               </View>
 
@@ -193,7 +201,7 @@ class OffersScreen extends React.Component  {
                                 />
                                 <View style={{flexDirection: 'column'}}>
                                   <Text style={{color: '#fff', fontWeight: '500'}}>Luxury Class</Text>
-                                  <Text style={{color: '#000'}}>MAYBACH</Text>
+                                  <ModalDropdown options={['BG 5234532 ASD', 'BG 5234532 ASD','BG 5234532 ASD', 'BG 5234532 ASD']}/>
                                 </View>
                               </View>
                             </View>
@@ -206,7 +214,7 @@ class OffersScreen extends React.Component  {
                   <View style={styles.box}>
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                       <Image style={styles.iconImg}
-                             source={require('../assets/images/icons-13.png')} />
+                             source={require('../assets/images/2_V3-51.png')} />
                       <Text style={styles.headerText}>Log Out</Text>
                     </View>
                   </View>
@@ -231,16 +239,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#0c0c0c',
   },
   headerLogo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FBAF42',
-    height: '30%',
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-    shadowColor: '#FBAF42',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FBAF42',
+        height: 225,
+        width: width - 70,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        shadowColor: '#FBAF42',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.8,
+        shadowRadius: 10,
+        marginBottom: 15
   },
   box: {
     backgroundColor: '#000',
@@ -291,14 +303,6 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
   },
-  logo: {
-    width:'60%',
-    height: 40,
-    flexDirection: 'row',
-    justifyContent:"center",
-    alignItems:"center",
-    marginTop: 65
-  },
   iconImg: {
     width: 50,
     height: 50,
@@ -312,4 +316,11 @@ const styles = StyleSheet.create({
     padding: 5,
     color: '#fffdff',
   },
+    logo: {
+        width:'60%',
+        height: 40,
+        justifyContent:"center",
+        alignItems:"center",
+        marginTop: 55,
+    },
 });

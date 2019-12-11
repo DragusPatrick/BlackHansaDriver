@@ -11,10 +11,8 @@ import {
   View,
 } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
-import OffersScreen from "./OffersScreen";
 
 var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
 
 class HomeScreen extends React.Component {
 
@@ -35,30 +33,35 @@ class HomeScreen extends React.Component {
     return (
         <View style={styles.container}>
 
-          <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
-            <TouchableOpacity onPress={() => navigate('Home')}>
-              <Image style={{ width: 35, height: 35,  }}
+          <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
+              <Image style={{ width: 30, height: 30, opacity: 1}}
                      source={require('../assets/images/menu/2_V3-44.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '800', paddingTop: 5}}>Home</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Offers')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Planned')}>
+              <Image style={{ width: 30, height: 30,  opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-45.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Pending</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Planned')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Settings')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-46.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Accepted</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Settings')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Cancelled')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-47.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Ended</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigate('Settings')}>
-              <Image style={{ width: 35, height: 35,  }}
+            <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Offers')}>
+              <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-48.png')} />
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500 ', paddingTop: 5}}>Profile</Text>
             </TouchableOpacity>
           </View>
 
@@ -230,7 +233,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:"center",
     alignItems:"center",
-    marginTop: 65
+    marginTop: 75
   },
   iconImg: {
     width: 50,
