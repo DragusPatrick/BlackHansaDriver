@@ -1,19 +1,49 @@
 import React, { PureComponent } from 'react';
-import {StyleSheet, View, Text, Dimensions, TouchableOpacity, Linking, Image} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, TouchableOpacity, Linking, Image, TextInput} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import openMap from 'react-native-open-maps';
+import Moment from 'moment';
 
 var width = Dimensions.get('window').width;
 
 class list_finished extends PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
-            content: false
+            content: false,
+            driver_id: '7'
         }
 
         this.data = props.data;
+    }
+
+    updateDriver(text, field) {
+        if (field == driver_id)
+        {
+            thi.setState({
+                driver_id:text
+            })
+        }
+    }
+
+    submit() {
+        let collection = {}
+        collection.driver_id = this.state.driver_id
+        console.warn(collection);
+
+        const url = 'https://app.blackhansa.de/api/v2/booking/changeDriver/'+this.data.id;
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                driver_id: '38',
+            }),
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => onsole.log('Succes:', response))
     }
 
     getSize() {
@@ -44,6 +74,7 @@ class list_finished extends PureComponent {
     }
 
     render() {
+        Moment.locale('en');
         return (
             <View style={{ width: width-30 }}>
                 <TouchableOpacity onPress={this.componentHideAndShow}>
@@ -57,7 +88,7 @@ class list_finished extends PureComponent {
 
                             <View style={{ flexDirection: 'column', justifyContent: 'space-between', paddingLeft: 25 }}>
                                 <View style={{marginBottom: 7}}>
-                                    <Text style={{ color: '#9B9B9D', fontSize: 12, }}>{this.data.pickup_hour}:{this.data.pickup_min} - 9 Dec 2019</Text>
+                                    <Text style={{ color: '#9B9B9D', fontSize: 12, }}>{this.data.pickup_hour}:{this.data.pickup_min} - {Moment(this.data.date).format('d MMM YY')}</Text>
                                 </View>
 
                                 <View>
@@ -133,7 +164,7 @@ class list_finished extends PureComponent {
                                     </View>
 
                                     <View >
-                                        <TouchableOpacity >
+                                        <TouchableOpacity onPress={() => this.submit()}>
                                             <Image style={{ width: 30, height: 30, justifyContent: 'center',
                                                 alignItems: 'center', }}
                                                    source={require('../../assets/images/mail_V3-30.png')} />

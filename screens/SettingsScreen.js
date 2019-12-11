@@ -14,13 +14,13 @@ class SettingsScreen extends React.Component {
   }
 
   componentDidMount(){
-    return fetch('https://app.blackhansa.de/api/v2/bookings/onway')
+    return fetch('https://app.blackhansa.de/api/v2/bookings/ended')
         .then((response) => response.json())
         .then((responseJson) => {
 
           this.setState({
             isLoading: false,
-            dataSource: responseJson.model.data,
+            dataSource: responseJson.model,
           }, function(){
 
           });
@@ -57,7 +57,7 @@ class SettingsScreen extends React.Component {
             <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Cancelled')}>
               <Image style={{ width: 30, height: 30, opacity: 0.6}}
                      source={require('../assets/images/menu/2_V3-47.png')} />
-              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Ended </Text>
+              <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Cancelled</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Offers')}>
@@ -66,6 +66,7 @@ class SettingsScreen extends React.Component {
               <Text style={{color: '#fff', fontSize: 9, fontWeight: '500', paddingTop: 5}}>Profile</Text>
             </TouchableOpacity>
           </View>
+
 
           <View style={{flexDirection: 'row', width:'100%', marginTop: 50 }}>
             <View style={{shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, backgroundColor: '#FBAF42',width: 25, height: 165, borderRadius: 20, marginTop: 35, marginLeft: -10, marginRight: 20, opacity: 0.6}}>
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent:"center",
     alignItems:"center",
-    marginTop: 55,
+    marginTop: 100
   },
   iconImg: {
     width: 50,
