@@ -18,12 +18,10 @@ class CancelledScreen extends React.Component {
         return fetch('https://app.blackhansa.de/api/v2/bookings/ended')
             .then((response) => response.json())
             .then((responseJson) => {
-
                 this.setState({
                     isLoading: false,
-                    dataSource: responseJson.model,
+                    dataSource: responseJson.model.data,
                 }, function(){
-
                 });
 
             })

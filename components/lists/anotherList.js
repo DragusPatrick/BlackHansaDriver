@@ -14,6 +14,7 @@ class AnotherList extends PureComponent {
         super(props);
         this.state = {
             content: false,
+            driver_id: '',
             imageURL :  'https://i.ibb.co/sCLT9R3/accepted-64.png'
         }
 
@@ -37,6 +38,34 @@ class AnotherList extends PureComponent {
             height: Dimensions.get('window').height
         }
     }
+
+    refreshPage() {
+        window.location.reload();
+    }
+
+    removeDriver() {
+        let collection = {}
+        collection.driver_id = this.state.driver_id
+        console.warn(collection);
+
+        const url = 'https://app.blackhansa.de/api/v2/booking/changeDriver/'+this.data.id;
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                driver_id: '',
+            }),
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => onsole.log('Succes:', response))
+
+        refreshPage();
+    }
+
+
 
     render() {
         Moment.locale('en');
@@ -180,9 +209,11 @@ class AnotherList extends PureComponent {
 
                                 <View style={{backgroundColor: '#0D0D0D', width:'20%',borderBottomRightRadius: 15,flexDirection: 'column', justifyContent: 'space-between', paddingTop:45, paddingBottom: 15, alignItems: 'center'}}>
                                     <View style={{borderBottomColor: '#fff', borderLeftBottomWidth: 1, }}>
-                                        <Text style={{color: '#fff', fontWeight: '600'}}>
-                                            HELP
-                                        </Text>
+                                        <TouchableOpacity onPress={() => this.removeDriver()}>
+                                            <Text style={{color: '#fff', fontWeight: '600'}}>
+                                                HELP
+                                            </Text>
+                                        </TouchableOpacity>
                                     </View>
 
                                     <View style={{

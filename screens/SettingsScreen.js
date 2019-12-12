@@ -14,17 +14,15 @@ class SettingsScreen extends React.Component {
   }
 
   componentDidMount(){
-    return fetch('https://app.blackhansa.de/api/v2/bookings/ended')
+    return fetch('https://app.blackhansa.de/api/v2/bookings/onway')
         .then((response) => response.json())
         .then((responseJson) => {
 
           this.setState({
             isLoading: false,
-            dataSource: responseJson.model,
+            dataSource: responseJson.model.data,
           }, function(){
-
           });
-
         })
         .catch((error) =>{
           console.error(error);

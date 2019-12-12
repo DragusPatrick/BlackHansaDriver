@@ -16,7 +16,7 @@ class FinishedScreen extends React.Component {
     }
 
     componentDidMount(){
-        return fetch('https://app.blackhansa.de/test')
+        return fetch('https://app.blackhansa.de/api/v2/bookings/finished')
             .then((response) => response.json())
             .then((responseJson) => {
 
