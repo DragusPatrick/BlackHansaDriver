@@ -10,24 +10,29 @@ import {
     AsyncStorage,
     TouchableHighlight
 } from "react-native";
-import { Input } from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome";
 import deviceStorage from '../../services/deviceStorage';
 import InputField from '../../components/InputFiled'
-import axios from 'axios';
 
-export default class Login extends Component {
+export default class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            loading: true,
-            email: '',
-            password: '',
+            email: 'codixital@gmail.com',
+            password: '8341009',
             error: '',
         };
 
         this.loginUser = this.loginUser.bind(this);
         this.onLoginFail = this.onLoginFail.bind(this);
+    }
+
+    handleEmailChange = email => {
+        this.setState({ email })
+    }
+
+    handlePasswordChange = password => {
+        this.setState({ password })
     }
 
     loginUser() {
@@ -51,49 +56,74 @@ export default class Login extends Component {
         //     this.onRegistrationFail();
         // });
 
-        const {email, password } = this.state;
+        const { email, password } = this.state;
 
         fetch('https://app.blackhansa.de/api/user/login', {
             method: 'POST',
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            }),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            }),
         })
-        .then(function(res){ return res.json(); })
-        .then((res) => {
-            if (res.error) {
-                alert("Aici")
-            } else {
-                console.warn(res);
-                console.warn(res.data.auth_token)
-                // AsyncStorage.setItem('jwt', res.token)
-                // alert(`Success! You may now access protected content.`)
-                // Redirect to home screen
-            }
-        })
-        .catch(() => {
-            alert('There was an error logging in.');
-        })
-        .done()
+            // .then(function(res){ return res.json(); })
+            // .then((res) => {
+            //     if (res.error) {
+            //         console.warn("error: " + res.error)
+            //     } else {
+            //         this.setState({error: ""});
+            //         let accessToken = res.data.auth_token;
+            //         console.warn("token: " + accessToken);
+            //         AsyncStorage.setItem('jwt', accessToken);
+            //         // alert(`Success! You may now access protected content.`)
+            //         // Redirect to home screen
+            //         // this.props.navigation.navigate('Home');
+            //     }
+            // })
+            // .catch(() => {
+            //     alert('There was an error logging in.');
+            // })
+            // .done()
+            .then(function(res){ return res.json(); })
+            .then((res) => {
+                deviceStorage.saveKey("userEmail", res.data.email);
+                deviceStorage.saveKey("id_token", res.data.auth_token);
+                deviceStorage.saveKey("userName", res.data.name);
+                deviceStorage.saveKey("userEmail", res.data.email);
+                this.props.newJWT(res.data.jwt);
+                this.props.navigation.navigate("Offers")
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
-    onRegistrationFail() {
-        this.setState({
-            error: 'Registration Failed',
-            loading: false
-        });
-    }
 
+        // .then(function(res){ return res.json(); })
+        // .then((res) => {
+        //     if (res.error) {
+        //         alert("Aici")
+        //     } else {
+        //         console.warn(res);
+        //         console.warn(res.data.auth_token)
+        //         // AsyncStorage.setItem('jwt', res.token)
+        //         // alert(`Success! You may now access protected content.`)
+        //         // Redirect to home screen
+        //     }
+        // })
+        // .catch(() => {
+        //     alert('There was an error logging in.');
+        // })
+        // .done()
 
 
     _signInAsync = async () => {
         await AsyncStorage.setItem('jwt', 'abc');
-        this.props.navigation.navigate('App');
+        // this.props.navigation.navigate('App');
     };
 
 
@@ -137,8 +167,7 @@ export default class Login extends Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="email"
-                                value={this.state.email}
-                                onChangeText={(email) => this.setState({ email })}
+                                onChangeText={this.handleEmailChange}
                             />
                             <InputField
                                 labelText="PASSWORD"
@@ -147,14 +176,13 @@ export default class Login extends Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="password"
-                                value={this.state.password}
-                                onChangeText={(password) => this.setState({ password })}
+                                onChangeText={this.handlePasswordChange}
                             />
                         </View>
                     </ScrollView>
 
                     <View style={styles.buttonWrapper}>
-                        <TouchableHighlight style={[{ opacity: 1 }, styles.button]} onPress={this.loginUser} >
+                        <TouchableHighlight style={[{ opacity: 1 }, styles.button]} onPress={this.loginUser.bind(this)} >
                             <Icon
                                 name="angle-right"
                                 color={{color: '#fff'}}

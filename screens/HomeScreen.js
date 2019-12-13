@@ -8,7 +8,7 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
-  View,
+  View, AsyncStorage,
 } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -16,23 +16,41 @@ var width = Dimensions.get('window').width; //full width
 
 class HomeScreen extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      content: false
+      loading: true,
+      name: '',
+      email: '',
+      error: '',
+      id_token: '',
+      content: ''
     }
+
+    this._bootstrap();
+  }
+
+  _bootstrap = async () => {
+    const userEmail = await AsyncStorage.getItem('userEmail');
+    const userName = await AsyncStorage.getItem('userName');
+    this.setState({email: userEmail, name: userName});
   }
 
   componentHideAndShow = () => {
     this.setState(previousState => ({
       content: !previousState.content }))
+
+    const headers = {
+      'Authorization': 'Bearer ' + this.props.jwt
+    };
   }
 
   render() {
+    const userName = AsyncStorage.getItem('userName');
+    const { name, email, error } = this.state;
     const {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
-
           <View style={{ position: 'absolute', top: 55, width: width - 40, zIndex: 50, marginLeft: 20, marginRight: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
               <Image style={{ width: 30, height: 30, opacity: 1}}
@@ -85,7 +103,7 @@ class HomeScreen extends React.Component {
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                   <Image style={styles.iconImg}
                          source={require('../assets/images/menu/2_V3-50.png')} />
-                  <Text style={styles.headerText}>Lorem Ipsum Dolor</Text>
+                  <Text style={styles.headerText}>{name}</Text>
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

@@ -3,7 +3,7 @@ import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,
 import Icon from "react-native-vector-icons/Ionicons";
 import { CheckBox } from 'react-native-elements';
 import ModalDropdown from 'react-native-modal-dropdown';
-
+import deviceStorage from '../services/deviceStorage';
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
@@ -12,15 +12,22 @@ class OffersScreen extends React.Component  {
   constructor(props){
     super(props);
     this.state = {
-      isLoading: true,
-      content: false,
-      content1: false,
-      checked: false,
-      loading: true,
-      email: '',
-      error: ''
+        loading: true,
+        name: '',
+        email: '',
+        error: '',
+        id_token: ''
     }
+
+    this.deleteJWT = deviceStorage.deleteJWT.bind(this);
+    this._bootstrap();
   }
+
+    _bootstrap = async () => {
+        const userEmail = await AsyncStorage.getItem('userEmail');
+        const userName = await AsyncStorage.getItem('userName');
+        this.setState({email: userEmail, name: userName});
+    }
 
   componentHideAndShow = () => {
     this.setState(previousState => ({
@@ -51,39 +58,47 @@ class OffersScreen extends React.Component  {
       // });
   }
 
+    componentDidMount(){
+        const headers = {
+            'Authorization': 'Bearer ' + this.props.jwt
+        };
+    }
+
+    removeJWT() {
+        try{
+            AsyncStorage.removeItem('id_token')
+                .then(
+                    () => {
+                        this.setState({
+                            jwt: ''
+                        })
+                    }
+                );
+        } catch (error) {
+            console.log('AsyncStorage Error: ' + error.message);
+        }
+        this.props.navigation.navigate('Login');
+    }
+
     async removeItemValue(key) {
         try {
-            await AsyncStorage.removeItem('jwt');
+            await AsyncStorage.removeItem('id_token');
+            console.warn('work');
             return true;
         }
         catch(exception) {
+            console.warn('ff');
             return false;
         }
     }
 
-  renderTrip({ item, index }) {
-    return (
-        <View>
-
-          <Icon
-              name='favorite'
-              size={25}
-              color={item.liked ? 'red' : 'gray'}
-              onPress={() => this.onLikePost({ item, index })}
-          />
-
-        </View>
-    );
-  }
-
   render() {
-      const {navigate} = this.props.navigation;
-      const { container, emailText, errorText } = styles;
+      const { navigate } = this.props.navigation;
       const { loading, email, error } = this.state;
+      const userEmail = AsyncStorage.getItem('email');
 
       return (
           <View style={styles.container}>
-
               <View style={{ position: 'absolute', top: 75, width: width - 100, zIndex: 50, marginLeft: 50, marginRight: 50, flexDirection: 'row', justifyContent: 'space-between'}}>
                   <TouchableOpacity style={{justifyContent:"center", alignItems:"center",}} onPress={() => navigate('Home')}>
                       <Image style={{ width: 30, height: 30, opacity: 0.6}}
@@ -164,7 +179,7 @@ class OffersScreen extends React.Component  {
                             <View style={{flexDirection: 'row', marginBottom: 10}}>
                               <View style={{flexDirection: 'column'}}>
                                 <Text style={{color: '#fff', fontWeight: '500', fontSize: 12}}>Email Address</Text>
-                                <Text style={{color: '#000'}}>{email}</Text>
+                                <Text style={{color: '#000'}}>{this.state.email}</Text>
                               </View>
                             </View>
                           </View>
@@ -172,8 +187,6 @@ class OffersScreen extends React.Component  {
                   }
                   </TouchableOpacity>
                 </View>
-
-
 
                 <View>
                   <TouchableOpacity onPress={this.component1HideAndShow}>
@@ -246,7 +259,7 @@ class OffersScreen extends React.Component  {
                 </View>
 
                 <View>
-                    <TouchableOpacity onPress={this.props.deleteJWT}>
+                    <TouchableOpacity onPress={this.removeJWT} >
                       <View style={styles.box}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                 <Image style={styles.iconImg}

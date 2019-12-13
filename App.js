@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
+import {View, AsyncStorage, StyleSheet} from 'react-native';
+
 import Auth from './screens/Auth/LoginScreen';
-import LoggedIn from './screens/OffersScreen';
+import Offers from './screens/OffersScreen';
 import deviceStorage from './services/deviceStorage.js';
 import AppNavigator from './navigation/AppNavigator.js';
+import MainTabNavigator from './navigation/MainTabNavigator';
+import ActivityIndicator from "react-native-web/dist/exports/ActivityIndicator";
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props)
     this.state = {
       jwt: '',
-      loading: true
+      loading: true,
     };
 
     this.newJWT = this.newJWT.bind(this);
@@ -27,12 +31,19 @@ export default class App extends Component {
   render() {
     if (!this.state.jwt) {
       return (
-          <Auth newJWT={this.newJWT}/>
+          <Auth newJWT={this.newJWT} />
       );
     } else if (this.state.jwt) {
       return (
-          <AppNavigator />
+          <AppNavigator  />
       );
     }
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0c0c0c',
+  },
+});

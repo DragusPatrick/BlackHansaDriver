@@ -1,5 +1,5 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import MainTabNavigator from './MainTabNavigator';
@@ -11,15 +11,15 @@ import SettingsScreen from '../screens/SettingsScreen';
 import CancelledScreen from '../screens/CancelledScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 
+
 const MainNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
-    Offers: {screen: OffersScreen},
+    Offers: { screen: OffersScreen },
     Planned: { screen: PendingScreen },
     Settings: { screen: SettingsScreen },
     Cancelled: { screen: CancelledScreen },
-    Login: { screen: LoginScreen },
+    Login: { screen: LoginScreen }
 });
 
-const App = createAppContainer(MainNavigator);
 
-export default App;
+export default createAppContainer(MainNavigator);
