@@ -11,7 +11,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 import CancelledScreen from '../screens/CancelledScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 
-
 const MainNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
     Offers: { screen: OffersScreen },
@@ -21,5 +20,6 @@ const MainNavigator = createStackNavigator({
     Login: { screen: LoginScreen }
 });
 
+const App = createAppContainer(MainNavigator);
 
-export default createAppContainer(MainNavigator);
+export default App;

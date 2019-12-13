@@ -14,13 +14,16 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import deviceStorage from '../../services/deviceStorage';
 import InputField from '../../components/InputFiled'
 
-export default class Login extends React.Component {
+
+
+class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             email: 'codixital@gmail.com',
             password: '8341009',
             error: '',
+            loading: true,
         };
 
         this.loginUser = this.loginUser.bind(this);
@@ -36,26 +39,6 @@ export default class Login extends React.Component {
     }
 
     loginUser() {
-
-        // const { email, password } = this.state;
-        //
-        // this.setState({ error: '', loading: true });
-        //
-        // // NOTE Post to HTTPS only in production
-        // axios.post("https://app.blackhansa.de/api/user/login",{
-        //     email: email,
-        //     password: password
-        // })
-        // .then((response) => {
-        //     console.warn(response.jwt);
-        //     // deviceStorage.saveKey("id_token", response.data.jwt);
-        //     this.props.newJWT(response.jwt);
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        //     this.onRegistrationFail();
-        // });
-
         const { email, password } = this.state;
 
         fetch('https://app.blackhansa.de/api/user/login', {
@@ -69,63 +52,26 @@ export default class Login extends React.Component {
                 password: this.state.password
             }),
         })
-            // .then(function(res){ return res.json(); })
-            // .then((res) => {
-            //     if (res.error) {
-            //         console.warn("error: " + res.error)
-            //     } else {
-            //         this.setState({error: ""});
-            //         let accessToken = res.data.auth_token;
-            //         console.warn("token: " + accessToken);
-            //         AsyncStorage.setItem('jwt', accessToken);
-            //         // alert(`Success! You may now access protected content.`)
-            //         // Redirect to home screen
-            //         // this.props.navigation.navigate('Home');
-            //     }
-            // })
-            // .catch(() => {
-            //     alert('There was an error logging in.');
-            // })
-            // .done()
-            .then(function(res){ return res.json(); })
-            .then((res) => {
-                deviceStorage.saveKey("userEmail", res.data.email);
-                deviceStorage.saveKey("id_token", res.data.auth_token);
-                deviceStorage.saveKey("userName", res.data.name);
-                deviceStorage.saveKey("userEmail", res.data.email);
-                this.props.newJWT(res.data.jwt);
-                this.props.navigation.navigate("Offers")
+        .then(function(res){ return res.json(); })
+        .then((res) => {
+            deviceStorage.saveKey("userEmail", res.data.email);
+            deviceStorage.saveKey("id_token", res.data.auth_token);
+            deviceStorage.saveKey("userName", res.data.name);
+            deviceStorage.saveKey("userEmail", res.data.email);
+            this.props.newJWT(res.data.jwt);
 
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+        this.props.navigation.navigate('Home');
     }
-
-
-        // .then(function(res){ return res.json(); })
-        // .then((res) => {
-        //     if (res.error) {
-        //         alert("Aici")
-        //     } else {
-        //         console.warn(res);
-        //         console.warn(res.data.auth_token)
-        //         // AsyncStorage.setItem('jwt', res.token)
-        //         // alert(`Success! You may now access protected content.`)
-        //         // Redirect to home screen
-        //     }
-        // })
-        // .catch(() => {
-        //     alert('There was an error logging in.');
-        // })
-        // .done()
-
 
     _signInAsync = async () => {
         await AsyncStorage.setItem('jwt', 'abc');
         // this.props.navigation.navigate('App');
     };
-
 
     onLoginFail() {
         this.setState({
@@ -167,7 +113,8 @@ export default class Login extends React.Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="email"
-                                onChangeText={this.handleEmailChange}
+                                value={this.state.email}
+                                onChangeText={email => this.setState({email})}
                             />
                             <InputField
                                 labelText="PASSWORD"
@@ -176,7 +123,8 @@ export default class Login extends React.Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="password"
-                                onChangeText={this.handlePasswordChange}
+                                value={this.state.password}
+                                onChangeText={password => this.setState({password})}
                             />
                         </View>
                     </ScrollView>
@@ -201,6 +149,8 @@ export default class Login extends React.Component {
 Login.navigationOptions = {
     header: null,
 };
+
+export default Login;
 
 const styles = StyleSheet.create({
     wrapper: {

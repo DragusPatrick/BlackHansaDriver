@@ -1,6 +1,5 @@
-import React, { Component} from 'react';
-import {View, AsyncStorage, StyleSheet} from 'react-native';
-
+import React, { Component, useState } from 'react';
+import {Platform, View, AsyncStorage, StatusBar, StyleSheet} from 'react-native';
 import Auth from './screens/Auth/LoginScreen';
 import Offers from './screens/OffersScreen';
 import deviceStorage from './services/deviceStorage.js';
@@ -8,7 +7,7 @@ import AppNavigator from './navigation/AppNavigator.js';
 import MainTabNavigator from './navigation/MainTabNavigator';
 import ActivityIndicator from "react-native-web/dist/exports/ActivityIndicator";
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,11 +34,13 @@ export default class App extends Component {
       );
     } else if (this.state.jwt) {
       return (
-          <AppNavigator  />
+          <AppNavigator />
       );
     }
   }
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

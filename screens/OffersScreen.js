@@ -20,6 +20,7 @@ class OffersScreen extends React.Component  {
     }
 
     this.deleteJWT = deviceStorage.deleteJWT.bind(this);
+    this.removeJWT = this.removeJWT.bind(this);
     this._bootstrap();
   }
 
