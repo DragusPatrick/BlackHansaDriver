@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, AsyncStorage} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { CheckBox } from 'react-native-elements';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -16,6 +16,9 @@ class OffersScreen extends React.Component  {
       content: false,
       content1: false,
       checked: false,
+      loading: true,
+      email: '',
+      error: ''
     }
   }
 
@@ -27,7 +30,36 @@ class OffersScreen extends React.Component  {
   component1HideAndShow = () => {
     this.setState(previousState => ({
       content1: !previousState.content1 }))
+
+      // const headers = {
+      //     'Authorization': 'Bearer ' + this.props.jwt
+      // };
+      // axios({
+      //     method: 'GET',
+      //     url: 'http://localhost:4000/api/v1/my_user',
+      //     headers: headers,
+      // }).then((response) => {
+      //     this.setState({
+      //         email: response.data.email,
+      //         loading: false
+      //     });
+      // }).catch((error) => {
+      //     this.setState({
+      //         error: 'Error retrieving data',
+      //         loading: false
+      //     });
+      // });
   }
+
+    async removeItemValue(key) {
+        try {
+            await AsyncStorage.removeItem('jwt');
+            return true;
+        }
+        catch(exception) {
+            return false;
+        }
+    }
 
   renderTrip({ item, index }) {
     return (
@@ -46,6 +78,9 @@ class OffersScreen extends React.Component  {
 
   render() {
       const {navigate} = this.props.navigation;
+      const { container, emailText, errorText } = styles;
+      const { loading, email, error } = this.state;
+
       return (
           <View style={styles.container}>
 
@@ -129,7 +164,7 @@ class OffersScreen extends React.Component  {
                             <View style={{flexDirection: 'row', marginBottom: 10}}>
                               <View style={{flexDirection: 'column'}}>
                                 <Text style={{color: '#fff', fontWeight: '500', fontSize: 12}}>Email Address</Text>
-                                <Text style={{color: '#000'}}>contact@codixital.com</Text>
+                                <Text style={{color: '#000'}}>{email}</Text>
                               </View>
                             </View>
                           </View>
@@ -211,16 +246,15 @@ class OffersScreen extends React.Component  {
                 </View>
 
                 <View>
-                  <View style={styles.box}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                      <Image style={styles.iconImg}
-                             source={require('../assets/images/2_V3-51.png')} />
-                      <Text style={styles.headerText}>Log Out</Text>
-                    </View>
-                  </View>
-                  {/*<View style={{zIndex: 1,shadowColor: '#FBAF42', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, shadowRadius: 10, backgroundColor: '#FBAF42',height: 25, borderRadius: 20, marginLeft: 35, marginRight: 35, marginTop: -30}}>*/}
-
-                  {/*</View>*/}
+                    <TouchableOpacity onPress={this.props.deleteJWT}>
+                      <View style={styles.box}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                <Image style={styles.iconImg}
+                                       source={require('../assets/images/2_V3-51.png')} />
+                                <Text style={styles.headerText}>Log Out</Text>
+                            </View>
+                      </View>
+                    </TouchableOpacity>
                 </View>
           </View>
       )

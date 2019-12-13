@@ -6,13 +6,104 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     StyleSheet,
-    Image
+    Image,
+    AsyncStorage,
+    TouchableHighlight
 } from "react-native";
-
+import { Input } from 'react-native-elements';
+import Icon from "react-native-vector-icons/FontAwesome";
+import deviceStorage from '../../services/deviceStorage';
 import InputField from '../../components/InputFiled'
-import NextArrowButton from "../../components/NextArrowButton";
+import axios from 'axios';
 
 export default class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: true,
+            email: '',
+            password: '',
+            error: '',
+        };
+
+        this.loginUser = this.loginUser.bind(this);
+        this.onLoginFail = this.onLoginFail.bind(this);
+    }
+
+    loginUser() {
+
+        // const { email, password } = this.state;
+        //
+        // this.setState({ error: '', loading: true });
+        //
+        // // NOTE Post to HTTPS only in production
+        // axios.post("https://app.blackhansa.de/api/user/login",{
+        //     email: email,
+        //     password: password
+        // })
+        // .then((response) => {
+        //     console.warn(response.jwt);
+        //     // deviceStorage.saveKey("id_token", response.data.jwt);
+        //     this.props.newJWT(response.jwt);
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        //     this.onRegistrationFail();
+        // });
+
+        const {email, password } = this.state;
+
+        fetch('https://app.blackhansa.de/api/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(function(res){ return res.json(); })
+        .then((res) => {
+            if (res.error) {
+                alert("Aici")
+            } else {
+                console.warn(res);
+                console.warn(res.data.auth_token)
+                // AsyncStorage.setItem('jwt', res.token)
+                // alert(`Success! You may now access protected content.`)
+                // Redirect to home screen
+            }
+        })
+        .catch(() => {
+            alert('There was an error logging in.');
+        })
+        .done()
+    }
+
+    onRegistrationFail() {
+        this.setState({
+            error: 'Registration Failed',
+            loading: false
+        });
+    }
+
+
+
+    _signInAsync = async () => {
+        await AsyncStorage.setItem('jwt', 'abc');
+        this.props.navigation.navigate('App');
+    };
+
+
+    onLoginFail() {
+        this.setState({
+            error: 'Login Failed',
+            loading: false
+        });
+    }
+
     render() {
         const {
             labelText,
@@ -34,10 +125,8 @@ export default class Login extends Component {
 
                     <ScrollView style={styles.scrollView}>
                         <View style={styles.loginHeader}>
-                            <Image style={styles.logo}
-                                   source={require('../../assets/images/logo.png')} resizeMode="contain"/>
 
-                            <Text style={{color: '#d6d6d6', fontWeight: '600', marginTop: 10}}>blackhansa elite</Text>
+                            <Text style={{color: '#d6d6d6', fontWeight: '600', marginTop: 10}}>Learning app</Text>
                         </View>
 
                         <View style={styles.loginBody}>
@@ -48,8 +137,8 @@ export default class Login extends Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="email"
-                                customStyle={{marginBottom:30}}
-
+                                value={this.state.email}
+                                onChangeText={(email) => this.setState({ email })}
                             />
                             <InputField
                                 labelText="PASSWORD"
@@ -58,13 +147,22 @@ export default class Login extends Component {
                                 textColor={{color:'#fff'}}
                                 borderBottomColor={{color:'#fff'}}
                                 inputType="password"
-                                customStyle={{marginBottom:30}}
-
+                                value={this.state.password}
+                                onChangeText={(password) => this.setState({ password })}
                             />
                         </View>
                     </ScrollView>
 
-                    <NextArrowButton />
+                    <View style={styles.buttonWrapper}>
+                        <TouchableHighlight style={[{ opacity: 1 }, styles.button]} onPress={this.loginUser} >
+                            <Icon
+                                name="angle-right"
+                                color={{color: '#fff'}}
+                                size={32}
+                                style={styles.icon}
+                            />
+                        </TouchableHighlight>
+                    </View>
 
                 </View>
             </KeyboardAvoidingView>
@@ -86,6 +184,20 @@ const styles = StyleSheet.create({
     scrollViewWrapper: {
         marginTop: 40,
         flex: 1
+    },
+    buttonWrapper: {
+        alignItems: "flex-end",
+        right: 20,
+        bottom: 20,
+        paddingTop: 0
+    },
+    button: {
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 50,
+        width: 60,
+        height: 60,
+        backgroundColor: '#FBAF42'
     },
     avoidView: {
         paddingLeft: 30,
