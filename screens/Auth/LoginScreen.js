@@ -7,6 +7,7 @@ import {
     ScrollView,
     StyleSheet,
     Image,
+    TextInput,
     AsyncStorage,
     TouchableHighlight
 } from "react-native";
@@ -20,8 +21,8 @@ class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            email: 'codixital@gmail.com',
-            password: '8341009',
+            email: '',
+            password: '',
             error: '',
             loading: true,
         };
@@ -101,31 +102,42 @@ class Login extends React.Component {
 
                     <ScrollView style={styles.scrollView}>
                         <View style={styles.loginHeader}>
+                            <Image style={styles.logo}
+                            source={require('../../assets/images/logo.png')} resizeMode="contain"/>
 
-                            <Text style={{color: '#d6d6d6', fontWeight: '600', marginTop: 10}}>Learning app</Text>
+                            <Text style={{color: '#d6d6d6', fontWeight: '600', marginTop: 10}}>blackhansa elite</Text>
                         </View>
 
                         <View style={styles.loginBody}>
-                            <InputField
-                                labelText="EMAIL ADDRESS"
-                                labelTextSize={14}
-                                labelColor={{color:'#fff'}}
-                                textColor={{color:'#fff'}}
-                                borderBottomColor={{color:'#fff'}}
-                                inputType="email"
-                                value={this.state.email}
-                                onChangeText={email => this.setState({email})}
-                            />
-                            <InputField
-                                labelText="PASSWORD"
-                                labelTextSize={14}
-                                labelColor={{color:'#fff'}}
-                                textColor={{color:'#fff'}}
-                                borderBottomColor={{color:'#fff'}}
-                                inputType="password"
-                                value={this.state.password}
-                                onChangeText={password => this.setState({password})}
-                            />
+                            <View style={[customStyle, styles.wrapperInput]}>
+                                <Text style={[{ color: '#fff', fontSize }, styles.labelInp]}>Email</Text>
+                                <TextInput
+                                    autoCorrect={false}
+                                    value={this.state.email}
+                                    onChangeText={email => this.setState({email})}
+                                    style={[
+                                        { color: '#fff'},
+                                        styles.inputFiled
+                                    ]}
+                                    secureTextEntry={"email"}
+                                />
+                            </View>
+
+                            <View style={[customStyle, styles.wrapperInput]}>
+                                <Text style={[{ color: '#fff', fontSize }, styles.labelInp]}>Password</Text>
+                                <TextInput
+                                    autoCorrect={false}
+                                    value={this.state.password}
+                                    onChangeText={password => this.setState({password})}
+                                    style={[
+                                        { color: '#fff'},
+                                        styles.inputFiled
+                                    ]}
+                                    secureTextEntry={"password"}
+
+                                />
+                            </View>
+
                         </View>
                     </ScrollView>
 
@@ -158,6 +170,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#0c0c0c',
         padding: 15
+    },
+    wrapperInput: {
+        display: "flex",
+        marginBottom: 25
+    },
+    labelInp: { fontWeight: "700", marginBottom: 10, color: '#fff', fontSize: 11 },
+    inputFiled: {
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderColor: '#fff',
+        padding:5,
+        opacity: 0.6
     },
     scrollViewWrapper: {
         marginTop: 40,

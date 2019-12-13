@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980b55f2-4b9a-4df1-9674-77c03bcf94b6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/AppNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/InputFiled.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/InputFiled.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Auth/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Auth/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/OffersScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/OffersScreen.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,10 +33,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/screens/Auth/LoginScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="39" />
+            <state relative-caret-position="321">
+              <caret line="124" column="1" selection-start-line="124" selection-start-column="1" selection-end-line="124" selection-end-column="1" />
               <folding>
                 <element signature="e#1#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/InputFiled.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="46" selection-start-line="46" selection-end-line="58" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,11 +109,11 @@
         <option value="$PROJECT_DIR$/services/AuthLoading.js" />
         <option value="$PROJECT_DIR$/services/deviceStorage.js" />
         <option value="$PROJECT_DIR$/components/SplashScreen.js" />
-        <option value="$PROJECT_DIR$/components/InputFiled.js" />
         <option value="$PROJECT_DIR$/screens/HomeScreen.js" />
         <option value="$PROJECT_DIR$/navigation/AppNavigator.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/screens/OffersScreen.js" />
+        <option value="$PROJECT_DIR$/components/InputFiled.js" />
         <option value="$PROJECT_DIR$/screens/Auth/LoginScreen.js" />
       </list>
     </option>
@@ -129,22 +139,6 @@
               <item name="BlackHansaDriver" type="b2602c69:ProjectViewProjectNode" />
               <item name="BlackHansaDriver" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BlackHansaDriver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BlackHansaDriver" type="462c0819:PsiDirectoryNode" />
-              <item name="navigation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BlackHansaDriver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BlackHansaDriver" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BlackHansaDriver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BlackHansaDriver" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-              <item name="Auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BlackHansaDriver" type="b2602c69:ProjectViewProjectNode" />
@@ -202,12 +196,12 @@
       <workItem from="1575888599986" duration="17393000" />
       <workItem from="1575984643963" duration="16843000" />
       <workItem from="1576055785848" duration="7848000" />
-      <workItem from="1576072751735" duration="57228000" />
+      <workItem from="1576072751735" duration="58384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129348000" />
+    <option name="totallyTimeSpent" value="130504000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -232,7 +226,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3299566" />
+      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.3299566" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
@@ -241,7 +235,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="Terminal" order="4" weight="0.27323273" />
+      <window_info anchor="right" id="Terminal" order="4" visible="true" weight="0.27323273" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,16 +433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/InputFiled.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/screens/HomeScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -489,10 +473,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/InputFiled.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="46" selection-start-line="46" selection-end-line="58" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/screens/Auth/LoginScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="39" />
+        <state relative-caret-position="321">
+          <caret line="124" column="1" selection-start-line="124" selection-start-column="1" selection-end-line="124" selection-end-column="1" />
           <folding>
             <element signature="e#1#42#0" expanded="true" />
           </folding>

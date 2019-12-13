@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
 class InputField extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            error: '',
+            loading: true,
+        };
+    }
+
     render() {
 
         const {
@@ -35,14 +45,17 @@ class InputField extends Component {
 }
 const styles = StyleSheet.create({
     wrapper: {
-        display: "flex"
+        display: "flex",
+        marginBottom: 25
     },
-    label: { fontWeight: "700", marginBottom: 10, color: '#fff' },
+    label: { fontWeight: "700", marginBottom: 10, color: '#fff', fontSize: 11 },
     inputFiled: {
         borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
         borderColor: '#fff',
-        paddingTop: 5,
-        paddingBottom: 5,
+        padding:5,
+        opacity: 0.6
     }
 });
 export default InputField;
